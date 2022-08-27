@@ -6,7 +6,7 @@
   "scripts": {
     "build-all": "cd personal-website && npm run build && cd ../jomaker && npm run build",
     "start": "node server/index",
-    "heroku-prebuild": "npm run build-all"
+    "heroku-postbuild": "npm run build-all"
   },
   "repository": {
     "type": "git",
