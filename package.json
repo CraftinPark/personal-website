@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index"
+    "build-all": "cd personal-website && npm run build && cd ../jomaker && npm run build",
+    "start": "node server/index"
   },
   "repository": {
     "type": "git",
@@ -22,5 +22,8 @@
   },
   "engines": {
     "node": "18.x"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
   }
 }

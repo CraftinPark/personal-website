@@ -1,0 +1,3 @@
+[submodule "jomaker"]
+	path = jomaker
+	url = git@github.com:CraftinPark/jomaker.git
