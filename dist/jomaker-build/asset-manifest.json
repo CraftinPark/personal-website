@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/jomaker/static/css/main.36208ab0.css",
+    "main.js": "/jomaker/static/js/main.76e98b4d.js",
+    "static/media/Rubik-VariableFont_wght.ttf": "/jomaker/static/media/Rubik-VariableFont_wght.3a8e5377732eefcf42fb.ttf",
+    "index.html": "/jomaker/index.html",
+    "main.36208ab0.css.map": "/jomaker/static/css/main.36208ab0.css.map",
+    "main.76e98b4d.js.map": "/jomaker/static/js/main.76e98b4d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.36208ab0.css",
+    "static/js/main.76e98b4d.js"
+  ]
+}

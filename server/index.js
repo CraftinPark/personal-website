@@ -5,19 +5,19 @@ const path = require("path");
 
 app.use(
   "/home",
-  express.static(path.join(__dirname, "../personal-website/build"))
+  express.static(path.join(__dirname, "../dist/personal-website-build"))
 );
 app.use(
   "/jomaker",
-  express.static(path.join(__dirname, "../jomaker/build"))
+  express.static(path.join(__dirname, "../dist/jomaker-build"))
 );
 
 app.get("home/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "/../personal-website/build/index.html"));
+  res.sendFile(path.join(__dirname, "/../dist/personal-website-build/index.html"));
 });
 
 app.get("/jomaker/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "/../jomaker/build/index.html"));
+  res.sendFile(path.join(__dirname, "/../dist/jomaker-build/index.html"));
 });
 
 app.get("/test", (req, res) => {
