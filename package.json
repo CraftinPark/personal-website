@@ -7,7 +7,7 @@
     "build-apps": "cd personal-website && npm run build && cd ../jomaker && npm run build",
     "copy-builds": "copyfiles -u 2 'personal-website/build/**/*' dist/personal-website-build && copyfiles -u 2 'jomaker/build/**/*' dist/jomaker-build",
     "create-builds": "npm run build-apps && npm run copy-builds",
-    "start": "npm run create-builds && node server/index",
+    "start": "node server/index",
     "deploy": "npm run create-builds && git push heroku main"
   },
   "repository": {
