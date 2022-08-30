@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/jomaker/static/css/main.36208ab0.css",
-    "main.js": "/jomaker/static/js/main.930da4ec.js",
+    "main.js": "/jomaker/static/js/main.8cb31931.js",
     "static/media/Rubik-VariableFont_wght.ttf": "/jomaker/static/media/Rubik-VariableFont_wght.3a8e5377732eefcf42fb.ttf",
     "index.html": "/jomaker/index.html",
     "main.36208ab0.css.map": "/jomaker/static/css/main.36208ab0.css.map",
-    "main.930da4ec.js.map": "/jomaker/static/js/main.930da4ec.js.map"
+    "main.8cb31931.js.map": "/jomaker/static/js/main.8cb31931.js.map"
   },
   "entrypoints": [
     "static/css/main.36208ab0.css",
-    "static/js/main.930da4ec.js"
+    "static/js/main.8cb31931.js"
   ]
 }
