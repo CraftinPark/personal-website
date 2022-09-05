@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 
 const User = new mongoose.Schema({
-  email: { type: String, required: true, unique: true },
+  username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   memberList: [
     {
@@ -19,6 +19,25 @@ const User = new mongoose.Schema({
       active: Boolean,
     },
   ],
+  previousJos: [
+    [
+      {
+        id: String,
+        name: String,
+        kName: String,
+        year: Number,
+        sex: String,
+        leader: Boolean,
+        active: Boolean,
+      },
+    ],
+  ],
+  settings: {
+    numberOfJos: { type: Number, default: 3 },
+    useDiversifierAlgorithm: { type: Boolean, default: true },
+    inclusionList: { type: String, default: "" },
+    exclusionList: { type: String, default: "" },
+  },
 });
 
 const model = mongoose.model("UserData", User);
@@ -32,6 +51,7 @@ mongoose.connection.on("open", function (ref) {
 });
 
 app.use(cors());
+app.use(express.json());
 
 app.use(
   "/home",
@@ -43,6 +63,10 @@ app.use(
 );
 
 // personal website
+
+app.get("/", (req, res) => {
+  res.redirect("/home");
+});
 
 app.get("home/*", (req, res) => {
   res.sendFile(
@@ -56,29 +80,59 @@ app.get("/jomaker/*", (req, res) => {
   res.sendFile(path.join(__dirname, "/../dist/jomaker-build/index.html"));
 });
 
-app.post("/jomaker/register", async (req, res) => {
-  console.log(req.body);
+app.post("/api/jomaker/register", async (req, res) => {
   try {
-    const user = await model.create({
-      email: req.body.email,
+    await model.create({
+      username: req.body.username,
       password: req.body.password,
+      memberList: [],
+      previousJos: [],
     });
     res.json({ status: "ok" });
   } catch (err) {
-    res.json({ status: "error", error: "duplicate email" });
+    res.json({ status: "error", error: "duplicate username" });
   }
 });
 
-app.post("/jomaker/login", async (req, res) => {
+app.post("/api/jomaker/login", async (req, res) => {
   const user = await model.findOne({
-    email: req.body.email,
+    username: req.body.username,
     password: req.body.password,
   });
   if (user) {
     res.json({ status: "ok", user: user });
   } else {
-    return res.json({ status: "error", user: false });
+    res.json({ status: "error", user: false });
   }
+});
+
+app.post("/api/jomaker/update-user", async (req, res) => {
+  console.log(req.body.id);
+  const user = await model
+    .findOneAndUpdate(
+      {
+        username: req.body.username,
+      },
+      {
+        memberList: req.body.memberList,
+        previousJos: req.body.previousJos,
+        settings: {
+          inclusionList: req.body.inclusionList,
+          exclusionList: req.body.exclusionList,
+        },
+      }
+    )
+    .then(() => {
+      res.json({ status: "ok" });
+    })
+    .catch(() => {
+      res.json({ status: "error" });
+    });
+});
+
+app.get("/api/jomaker/users", async (req, res) => {
+  const users = await model.find({});
+  res.send(users);
 });
 
 app.get("/test", async (req, res) => {
