@@ -81,15 +81,19 @@ app.get("/jomaker/*", (req, res) => {
 });
 
 app.post("/api/jomaker/register", async (req, res) => {
+  console.log(req.body);
+
   try {
     await model.create({
       username: req.body.username,
       password: req.body.password,
       memberList: [],
       previousJos: [],
+      settings: {},
     });
     res.json({ status: "ok" });
   } catch (err) {
+    console.log(err);
     res.json({ status: "error", error: "duplicate username" });
   }
 });
@@ -133,12 +137,6 @@ app.post("/api/jomaker/update-user", async (req, res) => {
 app.get("/api/jomaker/users", async (req, res) => {
   const users = await model.find({});
   res.send(users);
-});
-
-app.get("/test", async (req, res) => {
-  const data = await model.find({});
-  res.send(data);
-  console.log(data);
 });
 
 app.listen(port, () => {
