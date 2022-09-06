@@ -81,8 +81,6 @@ app.get("/jomaker/*", (req, res) => {
 });
 
 app.post("/api/jomaker/register", async (req, res) => {
-  console.log(req.body);
-
   try {
     await model.create({
       username: req.body.username,
@@ -94,7 +92,7 @@ app.post("/api/jomaker/register", async (req, res) => {
     res.json({ status: "ok" });
   } catch (err) {
     console.log(err);
-    res.json({ status: "error", error: "duplicate username" });
+    res.json({ status: "error", message: "Username already exists." });
   }
 });
 
@@ -106,7 +104,7 @@ app.post("/api/jomaker/login", async (req, res) => {
   if (user) {
     res.json({ status: "ok", user: user });
   } else {
-    res.json({ status: "error", user: false });
+    res.json({ status: "error", message: "Incorrect username or password." });
   }
 });
 
