@@ -109,7 +109,6 @@ app.post("/api/jomaker/login", async (req, res) => {
 });
 
 app.post("/api/jomaker/update-user", async (req, res) => {
-  console.log(req.body.id);
   const user = await model
     .findOneAndUpdate(
       {
