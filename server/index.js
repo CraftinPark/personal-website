@@ -12,7 +12,7 @@ const User = new mongoose.Schema({
     {
       id: String,
       name: String,
-      kName: String,
+      secondaryName: String,
       year: Number,
       sex: String,
       leader: Boolean,
@@ -24,7 +24,7 @@ const User = new mongoose.Schema({
       {
         id: String,
         name: String,
-        kName: String,
+        secondaryName: String,
         year: Number,
         sex: String,
         leader: Boolean,
@@ -109,6 +109,9 @@ app.post("/api/jomaker/login", async (req, res) => {
 });
 
 app.post("/api/jomaker/update-user", async (req, res) => {
+
+  console.log(req.body);
+
   const user = await model
     .findOneAndUpdate(
       {
