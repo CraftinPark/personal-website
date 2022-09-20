@@ -74,6 +74,12 @@ app.get("home/*", (req, res) => {
   );
 });
 
+app.get("/gotojomaker", (req, res) => {
+  console.log("received request to go to jomaker");
+  res.redirect("/jomaker");
+  window.location.assign('/jomaker')
+});
+
 // jomaker
 
 app.get("/jomaker/*", (req, res) => {
@@ -109,7 +115,6 @@ app.post("/api/jomaker/login", async (req, res) => {
 });
 
 app.post("/api/jomaker/update-user", async (req, res) => {
-
   console.log(req.body);
 
   const user = await model
