@@ -55,11 +55,11 @@ app.use(express.json());
 
 app.use(
   "/home",
-  express.static(path.join(__dirname, "../dist/personal-website-build"))
+  express.static(path.join(__dirname, "../personal-website/build"))
 );
 app.use(
   "/jomaker",
-  express.static(path.join(__dirname, "../dist/jomaker-build"))
+  express.static(path.join(__dirname, "../jomaker/build"))
 );
 
 // personal website
