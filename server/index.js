@@ -70,7 +70,7 @@ app.get("/", (req, res) => {
 
 app.get("home/*", (req, res) => {
   res.sendFile(
-    path.join(__dirname, "/../dist/personal-website-build/index.html")
+    path.join(__dirname, "/../personal-website/build/index.html")
   );
 });
 
@@ -83,7 +83,7 @@ app.get("/gotojomaker", (req, res) => {
 // jomaker
 
 app.get("/jomaker/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "/../dist/jomaker-build/index.html"));
+  res.sendFile(path.join(__dirname, "/../jomaker/build/index.html"));
 });
 
 app.post("/api/jomaker/register", async (req, res) => {
