@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build-personal-website": "cd personal-website",
     "build-apps": "cd personal-website && npm i && npm run build && cd ../jomaker && npm i && npm run build",
     "copy-builds": "copyfiles -u 2 'personal-website/build/**/*' dist/personal-website-build && copyfiles -u 2 'jomaker/build/**/*' dist/jomaker-build",
-    "create-builds": "npm run build-apps && npm run copy-builds",
+    "create-builds": "npm run build-personal-website",
     "start": "node server/index",
     "dev": "npm run create-builds && npx nodemon server/index",
     "deploy": "npm run create-builds && git push heroku main"
