@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build-apps": "cd personal-website && npm run build && cd ../jomaker && npm run build",
+    "build-apps": "cd personal-website && npm i && npm run build && cd ../jomaker && npm i && npm run build",
     "copy-builds": "copyfiles -u 2 'personal-website/build/**/*' dist/personal-website-build && copyfiles -u 2 'jomaker/build/**/*' dist/jomaker-build",
     "create-builds": "npm run build-apps && npm run copy-builds",
     "start": "node server/index",
