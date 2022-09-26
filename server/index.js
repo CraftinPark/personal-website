@@ -1,27 +1,9 @@
 const express = require("express");
-
-const http = require("http");
-const https = require("https");
+const app = express();
 const port = process.env.PORT || 9000;
 const path = require("path");
 const mongoose = require("mongoose");
 const cors = require("cors");
-
-const fs = require("fs");
-
-const hostName = "craftinpark.ca";
-const httpPort = 80;
-const httpsPort = 443;
-
-const httpsOptions = {
-  cert: fs.readFileSync("./ssl/craftinpark_ca.crt"),
-  ca: fs.readFileSync("./ssl/craftinpark_ca.ca-bundle"),
-  key: fs.readFileSync("./ssl/craftinpark_ca.key"),
-};
-
-const app = express();
-const httpServer = http.createServer(app);
-const httpsServer = https.createServer(httpsOptions, app);
 
 const User = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
@@ -70,18 +52,15 @@ mongoose.connection.on("open", function (ref) {
 
 app.use(cors());
 app.use(express.json());
-app.use((req, res, next) => {
-  if (req.protocol === "http") {
-    res.redirect(301, `https://${req.headers.host}${req.url}`);
-  }
-  next();
-});
 
 app.use(
   "/home",
   express.static(path.join(__dirname, "../personal-website/build"))
 );
-app.use("/jomaker", express.static(path.join(__dirname, "../jomaker/build")));
+app.use(
+  "/jomaker",
+  express.static(path.join(__dirname, "../jomaker/build"))
+);
 
 // personal website
 
@@ -90,13 +69,15 @@ app.get("/", (req, res) => {
 });
 
 app.get("home/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "/../personal-website/build/index.html"));
+  res.sendFile(
+    path.join(__dirname, "/../personal-website/build/index.html")
+  );
 });
 
 app.get("/gotojomaker", (req, res) => {
   console.log("received request to go to jomaker");
   res.redirect("/jomaker");
-  window.location.assign("/jomaker");
+  window.location.assign('/jomaker')
 });
 
 // jomaker
@@ -163,9 +144,6 @@ app.get("/api/jomaker/users", async (req, res) => {
   res.send(users);
 });
 
-// app.listen(port, () => {
-//   console.log(`app listening on port ${port}`);
-// });
-
-httpServer.listen(httpPort);
-httpsServer.listen(httpsPort);
+app.listen(port, () => {
+  console.log(`app listening on port ${port}`);
+});
